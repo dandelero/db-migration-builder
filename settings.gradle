@@ -1,0 +1,4 @@
+rootProject.name = 'db-migration-builder'
+
+include 'db-migration-api', 'db-migration-engine', 'db-migration-client', 'db-migration-cli'
+

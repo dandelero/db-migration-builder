@@ -1,0 +1,46 @@
+apply plugin: 'distribution'
+
+description 'DB migration Builder CLI Module'
+
+dependencies {
+    compile project(":db-migration-client")
+    compile "org.jetbrains.kotlinx:kotlinx-cli-jvm:$kotlinxCliJvmVersion"
+
+    testCompile project(":db-migration-engine").sourceSets.test.output
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "dev.dandelero.db.migration.client.CommandLineLauncher"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+// run: gradlew build will generate the zip
+distributions {
+    main {
+        baseName = 'dbmigrations'
+
+        contents {
+            from('src/dist/bin') {
+                into 'bin'
+            }
+
+            from('src/dist/conf') {
+                into 'conf'
+            }
+
+            into('libs') {
+                from jar
+            }
+        }
+    }
+
+}
+
+
+// We only want to generate a zip file.
+tasks.distTar.enabled = false

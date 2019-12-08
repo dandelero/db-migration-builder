@@ -1,0 +1,7 @@
+/.gradle/
+/build/
+/.idea/
+/db-migration-engine/build/
+/db-migration-client/build/
+/db-migration-cli/build/
+/db-migration-api/build/

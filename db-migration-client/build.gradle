@@ -1,0 +1,6 @@
+description 'DB Migration Builder Client Library'
+
+dependencies {
+    compile project(":db-migration-api"), project(":db-migration-engine")
+    compile "org.yaml:snakeyaml:$snakeYamlVersion"
+}

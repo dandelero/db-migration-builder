@@ -1,0 +1,6 @@
+description 'DB Migration Builder Engine Module'
+
+dependencies {
+    compile project(":db-migration-api")
+    compile "org.apache.commons:commons-text:$commonsTextVersion"
+}
