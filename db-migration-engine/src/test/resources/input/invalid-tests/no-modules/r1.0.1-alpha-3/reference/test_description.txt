@@ -1,0 +1,1 @@
+Invalid sequencing in the upgrade scripts (missing 0003-*.sql)

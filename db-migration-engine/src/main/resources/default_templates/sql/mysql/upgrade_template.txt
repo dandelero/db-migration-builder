@@ -1,0 +1,8 @@
+-- BEGIN UPGRADE SCRIPT ${index}/${scriptCount}: ${scriptName} --
+${scriptContents}
+
+INSERT IGNORE INTO ${changeLogTableName} (module_name, release_label, sequence_number, script_author, file_name)
+VALUES ('${moduleName}', '${releaseLabel}', ${scriptSequenceNumber}, '${scriptAuthor}', '${scriptName}')${statementSeparator}
+
+${statementDelimiter}
+-- END UPGRADE SCRIPT ${index}/${scriptCount}: ${scriptName} --

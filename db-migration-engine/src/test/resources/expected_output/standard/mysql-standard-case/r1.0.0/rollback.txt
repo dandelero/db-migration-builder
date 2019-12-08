@@ -1,0 +1,27 @@
+--
+-- Description:  r1.0.0 rollback file
+-- Created on:   2019-12-01T21:43:32.536
+-- Created by:   dandelero
+-- Script count: 3
+--
+
+-- BEGIN ROLLBACK SCRIPT: 0001-drop-table_1.sql --
+drop table IF EXISTS table_1;
+
+DELETE FROM change_log WHERE module_name = 'default' and release_label = 'r1.0.0' and sequence_number = 1;
+
+
+-- END ROLLBACK SCRIPT: 0001-drop-table_1.sql --
+-- BEGIN ROLLBACK SCRIPT: 0002-drop-table_2.sql --
+drop table IF EXISTS table_2;
+
+DELETE FROM change_log WHERE module_name = 'default' and release_label = 'r1.0.0' and sequence_number = 2;
+
+
+-- END ROLLBACK SCRIPT: 0002-drop-table_2.sql --
+
+-- BEGIN BIDIRECTIONAL SCRIPT 1/1: 0001-dump-changelog-table.sql --
+
+select * from change_log;
+
+-- END BIDIRECTIONAL SCRIPT 1/1: 0001-dump-changelog-table.sql --

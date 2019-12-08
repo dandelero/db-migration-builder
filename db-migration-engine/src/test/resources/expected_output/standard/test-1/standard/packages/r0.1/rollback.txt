@@ -1,0 +1,66 @@
+--
+-- Description:  r0.1 rollback file
+-- Created on:   2019-12-01T21:43:32.425
+-- Created by:   dandelero
+-- Script count: 4
+--
+
+
+----- BEGIN ROLLBACK SCRIPT: 0001-drop-table_1.sql -----
+
+BEGIN TRANSACTION [rollbackTran]
+    BEGIN TRY
+        drop table table_1
+
+        DELETE FROM dandelero_change_log WHERE module_name = 'packages' and release_label = 'r0.1' and sequence_number = 1
+
+        COMMIT TRANSACTION [rollbackTran]
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION [rollbackTran]
+    END CATCH
+GO
+----- END ROLLBACK SCRIPT: 0001-drop-table_1.sql -----
+
+
+----- BEGIN ROLLBACK SCRIPT: 0002-drop-table_2.sql -----
+
+BEGIN TRANSACTION [rollbackTran]
+    BEGIN TRY
+        drop table table_2
+        
+
+        DELETE FROM dandelero_change_log WHERE module_name = 'packages' and release_label = 'r0.1' and sequence_number = 2
+
+        COMMIT TRANSACTION [rollbackTran]
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION [rollbackTran]
+    END CATCH
+GO
+----- END ROLLBACK SCRIPT: 0002-drop-table_2.sql -----
+
+
+----- BEGIN ROLLBACK SCRIPT: 0003-delete-index-on-table_1.sql -----
+
+BEGIN TRANSACTION [rollbackTran]
+    BEGIN TRY
+        DROP INDEX IF EXISTS table_1_ix_col_1 ON table_1
+        
+
+        DELETE FROM dandelero_change_log WHERE module_name = 'packages' and release_label = 'r0.1' and sequence_number = 3
+
+        COMMIT TRANSACTION [rollbackTran]
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION [rollbackTran]
+    END CATCH
+GO
+----- END ROLLBACK SCRIPT: 0003-delete-index-on-table_1.sql -----
+
+
+----- BEGIN BIDIRECTIONAL SCRIPT 1/1: 0001-dump-changelog-table.sql -----
+
+select * from dandelero_change_log
+GO
+----- END BIDIRECTIONAL SCRIPT 1/1: 0001-dump-changelog-table.sql -----

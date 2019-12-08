@@ -1,0 +1,7 @@
+-- BEGIN ROLLBACK SCRIPT: ${scriptName} --
+${scriptContents}
+
+DELETE FROM ${changeLogTableName} WHERE module_name = '${moduleName}' and release_label = '${releaseLabel}' and sequence_number = ${scriptSequenceNumber}${statementSeparator}
+${statementDelimiter}
+
+-- END ROLLBACK SCRIPT: ${scriptName} --

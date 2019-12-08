@@ -1,0 +1,7 @@
+--
+-- Description:  ${releaseLabel} ${fileType} file
+-- Created on:   ${creationTimestamp}
+-- Created by:   ${scriptAuthor}
+-- Script count: ${scriptCount}
+--
+

@@ -1,0 +1,37 @@
+--
+-- Description:  r1.0.0 upgrade file
+-- Created on:   2019-12-01T21:43:32.534
+-- Created by:   dandelero
+-- Script count: 3
+--
+
+-- BEGIN UPGRADE SCRIPT 1/2: 0001-create-table_1.sql --
+CREATE TABLE IF NOT EXISTS table_1 (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    column_1_1 varchar(32) NOT NULL,
+    CONSTRAINT table_1_pk PRIMARY KEY (id)
+);
+
+INSERT IGNORE INTO change_log (module_name, release_label, sequence_number, script_author, file_name)
+VALUES ('default', 'r1.0.0', 1, 'dandelero', '0001-create-table_1.sql');
+
+
+-- END UPGRADE SCRIPT 1/2: 0001-create-table_1.sql --
+-- BEGIN UPGRADE SCRIPT 2/2: 0002-create-table_2.sql --
+CREATE TABLE IF NOT EXISTS table_2 (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    column_1_1 varchar(32) NOT NULL,
+    CONSTRAINT table_2_pk PRIMARY KEY (id)
+);
+
+INSERT IGNORE INTO change_log (module_name, release_label, sequence_number, script_author, file_name)
+VALUES ('default', 'r1.0.0', 2, 'dandelero', '0002-create-table_2.sql');
+
+
+-- END UPGRADE SCRIPT 2/2: 0002-create-table_2.sql --
+
+-- BEGIN BIDIRECTIONAL SCRIPT 1/1: 0001-dump-changelog-table.sql --
+
+select * from change_log;
+
+-- END BIDIRECTIONAL SCRIPT 1/1: 0001-dump-changelog-table.sql --

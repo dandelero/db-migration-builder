@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS table_1 (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    column_1_1 varchar(32) NOT NULL,
+    CONSTRAINT table_1_pk PRIMARY KEY (id)
+);

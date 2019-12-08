@@ -1,0 +1,6 @@
+
+-- BEGIN BIDIRECTIONAL SCRIPT ${index}/${scriptCount}: ${scriptName} --
+
+${scriptContents}
+
+-- END BIDIRECTIONAL SCRIPT ${index}/${scriptCount}: ${scriptName} --

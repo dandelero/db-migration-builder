@@ -1,0 +1,17 @@
+
+----- BEGIN ROLLBACK SCRIPT: ${scriptName} -----
+
+BEGIN TRANSACTION [rollbackTran]
+    BEGIN TRY
+        ${scriptContents}
+
+        DELETE FROM ${changeLogTableName} WHERE module_name = '${moduleName}' and release_label = '${releaseLabel}' and sequence_number = ${scriptSequenceNumber}${statementSeparator}
+
+        COMMIT TRANSACTION [rollbackTran]
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION [rollbackTran]
+    END CATCH
+${statementDelimiter}
+----- END ROLLBACK SCRIPT: ${scriptName} -----
+

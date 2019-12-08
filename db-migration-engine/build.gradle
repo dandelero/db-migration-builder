@@ -1,4 +1,5 @@
 description 'DB Migration Builder Engine Module'
+apply plugin: 'idea'
 
 dependencies {
     compile project(":db-migration-api")

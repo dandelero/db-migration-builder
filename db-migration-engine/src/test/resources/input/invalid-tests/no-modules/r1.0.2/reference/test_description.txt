@@ -1,0 +1,1 @@
+Invalid sequencing in the rollback scripts (missing 0003-*.sql)

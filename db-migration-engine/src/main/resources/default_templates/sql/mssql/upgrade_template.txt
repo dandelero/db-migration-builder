@@ -1,0 +1,19 @@
+
+----- BEGIN UPGRADE SCRIPT ${index}/${scriptCount}: ${scriptName} -----
+IF NOT EXISTS(SELECT 1 FROM ${changeLogTableName} where module_name = 'default' and release_label = '${releaseLabel}' and sequence_number = ${scriptSequenceNumber})
+BEGIN
+    BEGIN TRANSACTION [Tran1]
+        BEGIN TRY
+            ${scriptContents}
+
+            INSERT INTO ${changeLogTableName} (module_name, release_label, sequence_number, script_author, file_name)
+            VALUES ('${moduleName}', '${releaseLabel}', ${scriptSequenceNumber}, '${scriptAuthor}', '${scriptName}')${statementSeparator}
+
+            COMMIT TRANSACTION [Tran1]
+        END TRY
+        BEGIN CATCH
+            ROLLBACK TRANSACTION [Tran1]
+        END CATCH
+END
+${statementDelimiter}
+----- END UPGRADE SCRIPT ${index}/${scriptCount}: ${scriptName} -----
