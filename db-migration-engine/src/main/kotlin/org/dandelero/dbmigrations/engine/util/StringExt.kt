@@ -42,5 +42,5 @@ fun String.prefixNotNull(value: String?): String {
  * @return true if this string is contained in at least one of the input strings.
  */
 fun String.isContainedIn(vararg values: String): Boolean {
-    return values.firstOrNull() { it.isContainedIn(this) } != null
+    return values.first{ this.contains(it) } != null
 }
