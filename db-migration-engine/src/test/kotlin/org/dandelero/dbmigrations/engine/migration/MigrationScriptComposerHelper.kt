@@ -12,6 +12,7 @@
  */
 package org.dandelero.dbmigrations.engine.migration
 
+import java.io.File
 import org.dandelero.dbmigrations.api.application.ApplicationException
 import org.dandelero.dbmigrations.api.application.ErrorCode
 import org.dandelero.dbmigrations.api.delta.DeltaScriptService
@@ -33,11 +34,10 @@ import org.dandelero.dbmigrations.engine.util.readFully
 import org.dandelero.dbmigrations.engine.version.DirectoryVersionService
 import org.dandelero.dbmigrations.engine.version.VersionServiceSettings
 import org.dandelero.dbmigrations.engine.version.VersionedDirectory
-import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.fail
 import org.slf4j.LoggerFactory
-import java.io.File
 
 /**
  * An end-to-end test!
@@ -49,10 +49,10 @@ import java.io.File
  * @author dandelero
  */
 class MigrationScriptComposerHelper(
-        private val deltaScriptDirectoryServiceSettings: DeltaScriptDirectoryServiceSettings,
-        private val versionServiceSettings: VersionServiceSettings,
-        private val migrationScriptOrderSettings: MigrationScriptSettings,
-        private val versionDeserialzer: VersionDeserializer
+    private val deltaScriptDirectoryServiceSettings: DeltaScriptDirectoryServiceSettings,
+    private val versionServiceSettings: VersionServiceSettings,
+    private val migrationScriptOrderSettings: MigrationScriptSettings,
+    private val versionDeserialzer: VersionDeserializer
 ) {
 
     /**
@@ -131,10 +131,10 @@ class MigrationScriptComposerHelper(
      * @param databaseEngine the database engine to generate the migration script for.
      */
     fun runDefaultModuleTest(
-            directoryWithTestData: File,
-            testCaseLabel: String,
-            versionString: String,
-            databaseEngine: String
+        directoryWithTestData: File,
+        testCaseLabel: String,
+        versionString: String,
+        databaseEngine: String
     ) {
         val moduleService: ModuleService<DirectoryModule> = NoModuleDirectoryModuleService(directoryWithTestData)
         val defaultModule = moduleService.findModuleByName("")
@@ -163,12 +163,12 @@ class MigrationScriptComposerHelper(
      * @param databaseEngine the database engine to generate the migration script for.
      */
     fun runTestForLatestVersionInModule(
-            directoryWithTestData: File,
-            testIdentifier: String,
-            testCaseLabel: String,
-            moduleName: String,
-            expectedLatestVersionString: String,
-            databaseEngine: String
+        directoryWithTestData: File,
+        testIdentifier: String,
+        testCaseLabel: String,
+        moduleName: String,
+        expectedLatestVersionString: String,
+        databaseEngine: String
     ) {
         // Add in the test identifier into the directory structure as it contains our modules.
         val moduleBaseDir = File(directoryWithTestData, testIdentifier)
@@ -196,12 +196,12 @@ class MigrationScriptComposerHelper(
      * @param databaseEngine the database engine to generate the migration script for.
      */
     fun runTestForSpecificModuleVersion(
-            directoryWithTestData: File,
-            testIdentifier: String,
-            testCaseLabel: String,
-            moduleName: String,
-            versionString: String,
-            databaseEngine: String
+        directoryWithTestData: File,
+        testIdentifier: String,
+        testCaseLabel: String,
+        moduleName: String,
+        versionString: String,
+        databaseEngine: String
     ) {
 
         // Add in the test identifier into the directory structure as it contains our modules.
@@ -236,12 +236,12 @@ class MigrationScriptComposerHelper(
      * @param databaseEngine the database engine to generate the migration script for.
      */
     private fun generateAndAssertMigrationScriptForLatestVersionOfModule(
-            moduleService: ModuleService<DirectoryModule>,
-            composer: MigrationScriptComposer<DirectoryModule, VersionedDirectory>,
-            testIdentifier: String,
-            moduleName: String,
-            latestVersionString: String,
-            databaseEngine: String
+        moduleService: ModuleService<DirectoryModule>,
+        composer: MigrationScriptComposer<DirectoryModule, VersionedDirectory>,
+        testIdentifier: String,
+        moduleName: String,
+        latestVersionString: String,
+        databaseEngine: String
     ) {
         // Ensure the module exists.
         val module = moduleService.findModuleByName(moduleName)
@@ -259,11 +259,11 @@ class MigrationScriptComposerHelper(
      * @param databaseEngine the database engine to generate the migration script for.
      */
     private fun generateAndAssertMigrationScriptForSpecificVersionOfModule(
-            composer: MigrationScriptComposer<DirectoryModule, VersionedDirectory>,
-            testIdentifier: String,
-            module: DirectoryModule,
-            versionString: String,
-            databaseEngine: String
+        composer: MigrationScriptComposer<DirectoryModule, VersionedDirectory>,
+        testIdentifier: String,
+        module: DirectoryModule,
+        versionString: String,
+        databaseEngine: String
     ) {
         val moduleName = module.name
 
@@ -321,11 +321,11 @@ class MigrationScriptComposerHelper(
      * @param databaseEngine the database engine to generate the migration script for.
      */
     private fun generateAndAssertMigrationScriptForLatestVersionOfModule(
-            composer: MigrationScriptComposer<DirectoryModule, VersionedDirectory>,
-            testIdentifier: String,
-            module: DirectoryModule,
-            latestVersionString: String,
-            databaseEngine: String
+        composer: MigrationScriptComposer<DirectoryModule, VersionedDirectory>,
+        testIdentifier: String,
+        module: DirectoryModule,
+        latestVersionString: String,
+        databaseEngine: String
     ) {
         val moduleName = module.name
 
@@ -387,13 +387,13 @@ class MigrationScriptComposerHelper(
      * @return a pair of strings containing the expected output for the upgrade and rollback tests respectively.
      */
     private fun readOrCreateExpectedOutput(
-            permittedMachines: List<String>,
-            testIdentifier: String,
-            moduleName: String,
-            releaseDirName: String,
-            actualUpgradeOutput: String,
-            actualRollbackOutput: String,
-            regenerateExpectedOutputFiles: Boolean = false
+        permittedMachines: List<String>,
+        testIdentifier: String,
+        moduleName: String,
+        releaseDirName: String,
+        actualUpgradeOutput: String,
+        actualRollbackOutput: String,
+        regenerateExpectedOutputFiles: Boolean = false
     ): Pair<String, String> {
         val expectedOutputFiles = readExceptedOutput(testIdentifier, moduleName, releaseDirName,
                 listOf(upgradeFileName, rollbackFileName))
@@ -422,10 +422,10 @@ class MigrationScriptComposerHelper(
      * @return a mapping from the file name to the file contents.
      */
     private fun readExceptedOutput(
-            testIdentifier: String,
-            moduleName: String,
-            releaseDirName: String,
-            fileNames: List<String>
+        testIdentifier: String,
+        moduleName: String,
+        releaseDirName: String,
+        fileNames: List<String>
     ): Map<String, String> {
         val directoryPath = if (moduleName.isEmpty()) {
             "expected_output$sep$testIdentifier$sep$releaseDirName$sep"
@@ -454,12 +454,12 @@ class MigrationScriptComposerHelper(
      * @param rewriteFiles whether existing files are to be re-written.
      */
     private fun writeExpectedOutput(
-            permittedMachines: List<String>,
-            testIdentifier: String,
-            moduleName: String,
-            releaseDirName: String,
-            filesAndContents: List<Pair<String, String>>,
-            rewriteFiles: Boolean
+        permittedMachines: List<String>,
+        testIdentifier: String,
+        moduleName: String,
+        releaseDirName: String,
+        filesAndContents: List<Pair<String, String>>,
+        rewriteFiles: Boolean
     ) {
         val directoryPath = if (moduleName.isEmpty()) {
             "$testIdentifier$sep$releaseDirName$sep"
