@@ -33,7 +33,9 @@ import org.dandelero.dbmigrations.engine.util.readFully
 import org.dandelero.dbmigrations.engine.version.DirectoryVersionService
 import org.dandelero.dbmigrations.engine.version.VersionServiceSettings
 import org.dandelero.dbmigrations.engine.version.VersionedDirectory
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.fail
 import org.slf4j.LoggerFactory
 import java.io.File
 
