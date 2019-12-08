@@ -12,10 +12,10 @@
  */
 package org.dandelero.dbmigrations.client
 
-import org.dandelero.dbmigrations.api.application.ApplicationException
-import org.dandelero.dbmigrations.api.application.ErrorCode
 import java.util.Arrays
 import kotlin.collections.ArrayList
+import org.dandelero.dbmigrations.api.application.ApplicationException
+import org.dandelero.dbmigrations.api.application.ErrorCode
 import org.slf4j.LoggerFactory
 
 /**

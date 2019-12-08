@@ -12,6 +12,7 @@
  */
 package org.dandelero.dbmigrations.client
 
+import java.io.File
 import org.dandelero.dbmigrations.api.application.ApplicationException
 import org.dandelero.dbmigrations.api.application.ErrorCode
 import org.dandelero.dbmigrations.client.service.Semver1SchemeServiceBuilder
@@ -24,7 +25,6 @@ import org.dandelero.dbmigrations.engine.module.DirectoryModuleService
 import org.dandelero.dbmigrations.engine.module.NoModuleDirectoryModuleService
 import org.dandelero.dbmigrations.engine.version.DirectoryVersionService
 import org.dandelero.dbmigrations.engine.version.VersionedDirectory
-import java.io.File
 import org.slf4j.LoggerFactory
 
 /**

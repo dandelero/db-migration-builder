@@ -12,6 +12,7 @@
  */
 package org.dandelero.dbmigrations.client.service
 
+import java.io.File
 import org.dandelero.dbmigrations.api.delta.DeltaScriptTemplateLocator
 import org.dandelero.dbmigrations.engine.delta.DefaultDeltaScriptFileBuilder
 import org.dandelero.dbmigrations.engine.delta.DeltaScriptDirectoryService
@@ -24,7 +25,6 @@ import org.dandelero.dbmigrations.engine.migration.MigrationScriptSettings
 import org.dandelero.dbmigrations.engine.util.getOptionalString
 import org.dandelero.dbmigrations.engine.util.getRequiredBoolean
 import org.dandelero.dbmigrations.engine.util.getRequiredString
-import java.io.File
 
 /**
  * An implementation of [ServiceBuilder] that returns the common constructs and services between all version schemes.

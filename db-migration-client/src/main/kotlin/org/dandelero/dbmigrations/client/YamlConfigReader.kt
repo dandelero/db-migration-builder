@@ -12,13 +12,13 @@
  */
 package org.dandelero.dbmigrations.client
 
+import java.io.File
+import java.io.FileInputStream
+import java.io.InputStream
 import org.dandelero.dbmigrations.api.application.ApplicationException
 import org.dandelero.dbmigrations.api.application.ErrorCode
 import org.dandelero.dbmigrations.engine.util.getRequiredMap
 import org.dandelero.dbmigrations.engine.util.getRequiredMapHierarchy
-import java.io.File
-import java.io.FileInputStream
-import java.io.InputStream
 import org.yaml.snakeyaml.Yaml
 
 /**
