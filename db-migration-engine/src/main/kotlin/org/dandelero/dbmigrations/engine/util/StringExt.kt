@@ -35,3 +35,12 @@ fun String.prefixNotNull(value: String?): String {
         this + value
     }
 }
+
+/**
+ * Checks whether this string is contained in one of the provided values.
+ * @param values the other values to check against.
+ * @return true if this string is contained in at least one of the input strings.
+ */
+fun String.isContainedIn(vararg values: String): Boolean {
+    return values.firstOrNull() { it.isContainedIn(this) } != null
+}
