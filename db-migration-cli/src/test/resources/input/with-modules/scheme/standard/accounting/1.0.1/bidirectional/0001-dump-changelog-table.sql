@@ -1,0 +1,1 @@
+select * from dandelero_change_log

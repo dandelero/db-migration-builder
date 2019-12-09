@@ -1,0 +1,110 @@
+# Database preferences and settings.
+database:
+
+  # Engine-specific settings.
+  engine:
+    mssql:
+      # The name of the change-log table to be written to; default = 'change_log'.
+      change-log-table-name: 'change-log'
+
+      # The value for the delimiter to be written between statements.
+      db-statement-delimiter: 'GO'
+
+      # The value for the separator to be written between statements.
+      db-statement-separator: ''
+    mysql:
+      # The name of the change-log table to be written to; default = 'change_log'.
+      change-log-table-name: 'change-log'
+
+      # The value for the delimiter to be written between statements.
+      db-statement-delimiter: ''
+
+      # The value for the separator to be written between statements.
+      db-statement-separator: ''
+
+# General settings.
+general:
+  # Whether rollback scripts are optional; default = false.
+  rollback-scripts-optional: false
+
+  # The extension of the delta scripts to be processed; default = 'sql'.
+  delta-script-extension: 'sql'
+
+  # The name of the upgrade scripts directory; default = 'upgrade'.
+  upgrade-directory-name: 'upgrade'
+
+  # The name of the rollback scripts directory; default = 'rollback'.
+  rollback-directory-name: 'rollback'
+
+  # The name of the bidirectional scripts directory; default = 'bidirectional'.
+  bidirectional-directory-name: 'bidirectional'
+
+  # Whether invalid version directories are to be ignored; default = false.
+  ignore-invalid-versions: false
+
+  # Whether bidirectional scripts are to be written before or after upgrade scripts, or not at all; default = last
+  bidirectional-script-to-upgrade-script-order: last
+
+  # Whether bidirectional scripts are to be written before or after rollback scripts, or not at all; default = last
+  bidirectional-script-to-rollback-script-order: last
+
+  # The path to the directory containing templates that are to be used instead of the default templates.
+  template-override-directory: ''
+
+# Configuration for all supported schemes.
+version-schemes:
+
+  # Defines the settings for the default versioning scheme used in the application.
+  default:
+    # The name of this versioning scheme; this must correspond to an application-supported scheme.
+    scheme: standard
+
+    # The prefix string that prepends the version number for the standard version scheme.
+    prefix: ''
+
+    # The string that separates the prefix and version number for the standard version scheme.
+    prefix-separator: ''
+
+    # The string that separates the digits in the version number for the standard version scheme.
+    digit-separator: '.'
+
+    # The string that separates the version number from the tag for the standard version scheme.
+    tag-separator: '-'
+
+    # The string that separates the tag pre-release tag from the (tag) sequence number for the standard version scheme.
+    tag-sequence-separator: '-'
+
+  # An example of a customized 'standard' versioning scheme.
+  project-1:
+    # The name of this versioning scheme; this must correspond to an application-supported scheme.
+    scheme: standard
+
+    # The prefix string that prepends the version number for the standard version scheme.
+    prefix: 'r'
+
+    # The string that separates the prefix and version number for the standard version scheme.
+    prefix-separator: ''
+
+    # The string that separates the digits in the version number for the standard version scheme.
+    digit-separator: '.'
+
+    # The string that separates the version number from the tag for the standard version scheme.
+    tag-separator: '-'
+
+    # The string that separates the tag pre-release tag from the (tag) sequence number for the standard version scheme.
+    tag-sequence-separator: '-'
+
+  # An example of the semver1 config.
+  project-2:
+    # The name of this versioning scheme; this must correspond to an application-supported scheme.
+    scheme: semver1
+
+    # The string that separates the digits in the version number for the standard version scheme.
+    digit-separator: '.'
+
+    # The format of the date component of the version.
+    date-format: yyyyMMddHHmmss
+
+    # The string that separates the digits from the date portion of the scheme.
+    date-separator: '+'
+
