@@ -17,6 +17,7 @@ import org.dandelero.dbmigrations.engine.delta.DeltaScriptDirectoryServiceSettin
 import org.dandelero.dbmigrations.engine.test.util.TestUtil
 import org.dandelero.dbmigrations.engine.version.VersionServiceSettings
 import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 
 /**
@@ -36,6 +37,15 @@ class MigrationScriptComposerTest {
      * A deserializer instance.
      */
     private val versionDeserialzer2 = TestVersionRegistry.createDeserializer2()
+
+    companion object {
+
+        @BeforeAll
+        @JvmStatic
+        fun setup() {
+            System.setProperty("user.name", "dandelero")
+        }
+    }
 
     /**
      * Default module with upgrade, rollback and bidirectional scripts.
