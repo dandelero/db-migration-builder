@@ -279,7 +279,7 @@ class MigrationScriptComposerHelper(
         // Rollback file is only generated if there were input scripts.
         val actualRollbackOutput = migrationScriptRollbackFile.readFully()
                 ?: if (deltaScriptDirectoryServiceSettings.rollbackScriptsMustExist) {
-                    fail<String>("Rollback file not generated")
+                    throw ApplicationException(ErrorCode.MISSING_RESOURCE.withDetails("Rollback file not generated"))
                 } else {
                     ""
                 }

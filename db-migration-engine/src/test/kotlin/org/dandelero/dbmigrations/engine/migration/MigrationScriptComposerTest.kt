@@ -135,7 +135,7 @@ class MigrationScriptComposerTest {
      */
     @Test
     fun defaultModuleTest3() {
-        // Relax our rollback file existence constraint.
+        // Rollback scripts must exist.
         val deltaScriptDirectoryServiceSettings = DeltaScriptDirectoryServiceSettings(rollbackScriptsMustExist = true)
         val versionServiceSettings = VersionServiceSettings()
         val migrationScriptOrderSettings = MigrationScriptSettings(dbStatementDelimiter = "GO",

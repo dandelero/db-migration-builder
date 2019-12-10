@@ -132,11 +132,13 @@ class MigrationScriptComposer<M : Module, V : Version>(
                     bidirectionalUpgradeScripts, migrationScriptSettings.upgradeScriptOrder)
         }
 
-        logger.debug("Composing the rollback script using ${rollbackScripts.size} upgrade delta scripts " +
-                "and ${bidirectionalRollbackScripts.size} bidirectional scripts ...")
-        with(migrationScriptWriterFactory.createRollbackScriptWriter(databaseEngine, module, version)) {
-            generateOverallScript(this, DeltaScriptCategory.ROLLBACK, module, version, rollbackScripts,
-                    bidirectionalRollbackScripts, migrationScriptSettings.rollbackScriptOrder)
+        if (rollbackScripts.isNotEmpty()) {
+            logger.debug("Composing the rollback script using ${rollbackScripts.size} upgrade delta scripts " +
+                    "and ${bidirectionalRollbackScripts.size} bidirectional scripts ...")
+            with(migrationScriptWriterFactory.createRollbackScriptWriter(databaseEngine, module, version)) {
+                generateOverallScript(this, DeltaScriptCategory.ROLLBACK, module, version, rollbackScripts,
+                        bidirectionalRollbackScripts, migrationScriptSettings.rollbackScriptOrder)
+            }
         }
     }
 
