@@ -15,7 +15,8 @@ package org.dandelero.dbmigrations.api.delta;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Represents a single script that applies a delta operation onto a database.
+ * A delta script is a script containing a change to a database resources, such as adding a column, adding an index, etc.
+ * Delta scripts have a sequence number that dictates the order in which they are applied.
  * <br />
  * Created at: 29/10/19 7:35 am
  *

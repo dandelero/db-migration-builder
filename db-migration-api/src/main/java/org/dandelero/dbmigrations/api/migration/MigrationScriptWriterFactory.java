@@ -16,7 +16,8 @@ import org.dandelero.dbmigrations.api.module.Module;
 import org.dandelero.dbmigrations.api.version.Version;
 
 /**
- * A factory for creating {@link MigrationScriptWriter} instances.
+ * A factory for creating {@link MigrationScriptWriter} instances based on parameters such as the target database,
+ * version, etc.
  * <br />
  * Created at: 29/10/19 10:09 pm
  *

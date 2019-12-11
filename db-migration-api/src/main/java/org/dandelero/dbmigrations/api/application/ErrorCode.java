@@ -36,7 +36,11 @@ public enum ErrorCode {
 
     // Module
     INVALID_MODULE(4000, "Invalid module"),
-    MODULE_DIRECTORY_ERROR(4001, "Invalid module directory");
+    MODULE_DIRECTORY_ERROR(4001, "Invalid module directory"),
+
+    // Other
+    OTHER(9999, "Other error");
+
 
     /**
      * The error code.

@@ -15,7 +15,7 @@ package org.dandelero.dbmigrations.api.migration;
 import java.util.Map;
 
 /**
- * An interface for writing scripts to a sink.
+ * An interface for writing migration scripts to a sink.
  * <br />
  * Created at: 28/10/19 9:41 pm
  *

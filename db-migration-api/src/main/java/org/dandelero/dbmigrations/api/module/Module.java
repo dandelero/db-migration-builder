@@ -13,7 +13,30 @@
 package org.dandelero.dbmigrations.api.module;
 
 /**
- * Defines a module within a versioned structure.
+ * A module is a logical grouping of database resources that is independently versioned from other aspects of the
+ * database.
+ * <p/>
+ * For example, in a complex system, you may have modules for "Account", "HR", "Remuneration", and each of those
+ * modules can be modified (and versioned) independent of other modules.
+ * <br />
+ * Typical hierarchy:
+ * <ul>
+ *     <li>
+ *         Accounting
+ *         <ul>
+ *             <li>1.0.0</li>
+ *             <li>1.0.1</li>
+ *         </ul>
+ *     </li>
+ *     <li>
+ *         HR
+ *         <ul>
+ *             <li>0.2.3</li>
+ *             <li>0.3.0</li>
+ *         </ul>
+ *     </li>
+ * </ul>
+ * <p>
  * <br />
  * Created at: 29/10/19 6:52 am
  *

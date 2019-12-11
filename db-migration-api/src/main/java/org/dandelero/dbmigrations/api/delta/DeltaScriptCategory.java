@@ -13,7 +13,9 @@
 package org.dandelero.dbmigrations.api.delta;
 
 /**
- * The category of scripts supported by the application.
+ * The category of delta scripts supported by the application.
+ * <br />
+ * Delta scripts can be applied upon upgrade or rollback, or in both upgrade and rollback operations.
  * <br />
  * Created at: 28/10/19 5:59 pm
  *

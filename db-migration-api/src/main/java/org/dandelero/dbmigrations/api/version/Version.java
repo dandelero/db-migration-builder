@@ -13,7 +13,8 @@
 package org.dandelero.dbmigrations.api.version;
 
 /**
- * Defines a version for a set of related resources (scripts).
+ * Defines a version for a set of related delta scripts that may be part of a module.
+ * <p>
  * <br />
  * Created at: 28/10/19 9:27 pm
  *

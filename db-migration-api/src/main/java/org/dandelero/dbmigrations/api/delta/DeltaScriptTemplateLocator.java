@@ -13,7 +13,8 @@
 package org.dandelero.dbmigrations.api.delta;
 
 /**
- * Locates templates that are applied to delta scripts to compose an overall migration script.
+ * Locates templates that are applied to individual delta scripts that are then pieced together
+ * to compose an overall migration (upgrade or rollback) script.
  * <br />
  * Created at: 28/10/19 5:55 pm
  *
