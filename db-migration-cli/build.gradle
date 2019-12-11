@@ -1,6 +1,6 @@
 apply plugin: 'distribution'
 
-description 'DB migration Builder CLI Module'
+description 'DB Migration Builder CLI Module'
 
 dependencies {
     compile project(":db-migration-client")
@@ -11,7 +11,7 @@ dependencies {
 
 jar {
     manifest {
-        attributes "Main-Class": "dev.dandelero.db.migration.client.CommandLineLauncher"
+        attributes "Main-Class": "org.dandelero.dbmigrations.client.CommandLineLauncher"
     }
 
     from {
