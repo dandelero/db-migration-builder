@@ -98,7 +98,7 @@ If you prefer to use DB Migrations Builder manually or via a [ant](https://ant.a
 1. Run `$DBMIG_HOME/db-migration.sh` with the relevant parameters
 
 The following parameters are available:
-```$bash
+```shell script
 Usage: db-migration.sh
     [-d <database>] the type of database to generate migrations for
     [-i <input directory>] the path to the input directory containing the modules/versions
@@ -127,23 +127,65 @@ Note that the version *must* match the name of the directory (i.e. version!) tha
 
 ### version scheme
 Optional - the name of the versioning scheme used, and this *must* match the in either the [default configuration](https://github.com/dandelero/db-migration-builder/blob/master/db-migration-client/src/main/resources/conf/default-config.yaml)
-or in your config file override. [TODO: link to customizing section]
+or in your config file override.
 
 The schemes supported in the bundled default configuration are `default-standard` and `default-semver1`, with the default
-being `default-standard`; refer to the section on [version schemes](http://TODO:seturl) if you wish to build your own
-scheme.
+being `default-standard`; refer to the section on customization if you wish to build your own scheme.
 
 # Customizing
 The application comes bundled with [default configuration](https://github.com/dandelero/db-migration-builder/blob/master/db-migration-client/src/main/resources/conf/default-config.yaml), 
-but if you would like to customize the configuration you can do so by creating your very own `$DBMIG_HOME/conf/config.yaml` file
+to control application behaviour.
 
-Th
-TODO: how to setup config.yaml?
+The configuration contains settings to control:
+1. application controls and preferences
+1. database settings
+1. version schemes
 
+To create your own configuration you can start by copying the [default configuration](https://github.com/dandelero/db-migration-builder/blob/master/db-migration-client/src/main/resources/conf/default-config.yaml) 
+into your very own `$DBMIG_HOME/conf/config.yaml` file and change the fields as necessary.
+
+## Add a new database
+To add support for a different database (e.g. `foodb`) create a sub-element beneath `database\engine` and change the 
+values as desired.
+```yaml
+# Database preferences and settings.
+database:
+
+  # Engine-specific settings.
+  engine:
+    foodb:
+      # The name of the change-log table to be written to; default = 'change_log'.
+      change-log-table-name: 'change_log'
+
+      # The value for the delimiter to be written between statements.
+      db-statement-delimiter: 'GO'
+
+      # The value for the separator to be written between statements.
+      db-statement-separator: ''
+```
+
+If you add support for a new database then you need to create a new set of templates for piecing together the individual 
+delta scripts into overall change scripts; you can find the templates for the database that have support at this time [here](https://github.com/dandelero/db-migration-builder/tree/master/db-migration-engine/src/main/resources/default_templates/sql).
+
+To add a set of new templates for our new database engine (foodb):
+1. create a directory to store your new templates, we recommend using: `$DBMIG_HOME/conf/templates/foodb`
+1. copy one of the [built-in supported database templates](https://github.com/dandelero/db-migration-builder/tree/master/db-migration-engine/src/main/resources/default_templates/sql/mysql) 
+into this directory
+1. make changes to the templates that you desire
+1. modify the `template-override-directory` in the config.yaml file to contain the full path to the override directory, 
+which in this case is `$DBMIG_HOME/conf/templates`
+
+
+## Application controls and preferences
+You can control application behaviour by altering the values of the fields beneath `general`; each field has a 
+description to help you set an appropriate value.
+
+## Version schemes
 Add support for a custom database?
 
 TODO: set up custom version scheme?
 
+Build your own version scheme?
 Templates?
 
 # I love DB Migration Builder
@@ -173,8 +215,52 @@ Whether it's small enough to provide a small toy or large enough to help provide
 occupational therapy, etc) you'll help a little friend have a better chance in life.
 
 # Roadmap
-Take a look at [our list](https://github.com/dandelero/db-migration-builder/issues) to see what we have on our roadmap.
-If you'd like to see something added feel free to [raise a feature request](http://TODO-button-url)
+Take a look at [our list](https://github.com/dandelero/db-migration-builder/issues) to see what we have on our roadmap 
+or if you'd like to see something.
+
+
+# Out-of-the-box behaviour
+TODO: supported version schemes and examples
+templates
+```yaml
+# Configuration for all supported schemes.
+version-schemes:
+
+  # Defines the settings for the default versioning scheme used in the application.
+  default-standard:
+    # The name of this versioning scheme; this must correspond to an application-supported scheme.
+    scheme: standard
+
+    # The prefix string that prepends the version number for the standard version scheme.
+    prefix: ''
+
+    # The string that separates the prefix and version number for the standard version scheme.
+    prefix-separator: ''
+
+    # The string that separates the digits in the version number for the standard version scheme.
+    digit-separator: '.'
+
+    # The string that separates the version number from the tag for the standard version scheme.
+    tag-separator: '-'
+
+    # The string that separates the tag pre-release tag from the (tag) sequence number for the standard version scheme.
+    tag-sequence-separator: '-'
+
+  # The default semver1 config.
+  default-semver1:
+    # The name of this versioning scheme; this must correspond to an application-supported scheme.
+    scheme: semver1
+
+    # The string that separates the digits in the version number for the standard version scheme.
+    digit-separator: '.'
+
+    # The format of the date component of the version.
+    date-format: yyyyMMddHHmmss
+
+    # The string that separates the digits from the date portion of the scheme.
+    date-separator: '+'
+
+```
 
 TODO: GENERAL tasks
 - Raise issue to add support for other databases {hsql, sybase, oracle, etc}
