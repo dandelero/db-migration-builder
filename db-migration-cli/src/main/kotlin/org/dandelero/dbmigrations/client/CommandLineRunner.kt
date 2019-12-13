@@ -69,12 +69,11 @@ class CommandLineRunner(private val args: Array<String>) {
             .required()
 
     /**
-     * The path to the config file for the application.
+     * The path to the config file override to be used.
      */
-    private val configFilePath by parser.option(ArgType.String, shortName = "cf",
-            fullName = "config-file",
-            description = "The full path to the config file")
-            .required()
+    private val overrideConfigFilePath by parser.option(ArgType.String, shortName = "cfo",
+            fullName = "config-file-override",
+            description = "The full path to the (override) config file to be used")
 
     /**
      * The version to be processed.
@@ -105,6 +104,6 @@ class CommandLineRunner(private val args: Array<String>) {
                 outputDirectoryPath = outputDirectoryPath,
                 moduleListCsvString = modulesToProcessString,
                 versionToProcess = versionToProcess,
-                configFile = configFilePath)
+                configFile = overrideConfigFilePath)
     }
 }
