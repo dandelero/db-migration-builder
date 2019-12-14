@@ -33,6 +33,18 @@ To use DB Migration Builder it is necessary to agree on the lingo.
 (also known as "change scripts") are SQL files created by users to transition a database resources (e.g. table, records, 
 view) from one state to another. Developers write these SQL files just like they would do for any other tool!
 
+Delta scripts can be categorized in one of the following:
+* upgrade scripts
+* rollback scripts
+* bidirectional scripts
+
+The upgrade and rollback scripts are self-explanatory, the bidirectional scripts are applied in both upgrade and rollback 
+migration scripts and are typically used to perform actions such as logging.
+
+### Migration/Change scripts
+A set of related delta scripts are pieced together to create a single migration script; migration scripts are required 
+for both upgrade and rollback operations on a database.
+
 ### Modules
 A [Module](https://github.com/dandelero/db-migration-builder/blob/master/db-migration-api/src/main/java/org/dandelero/dbmigrations/api/module/Module.java)
 is a logical aggregation of related resources or a functional area of an application that is independently versioned.
@@ -77,11 +89,14 @@ For the case where no modules are necessary (most systems) you will have the fol
     - 0002-insert-new-admin.sql
 ```
 
-# How do I start?
+# How do I start? Quickstart
 TODO: how to set a scheme
 How to setup a config yaml if using a different scheme
 How to lay out scripts (modules vs no modules)
 Schemes provided by default
+STarting a new project
+- use on of our schemes
+- if wanting to use a different scheme
 
 # Using DB Migrations Builder
 The most common way to use DB Migration Builder is via a plugin, and we have [maven](https://github.com/dandelero/db-migration-builder-maven-plugin)
@@ -145,8 +160,8 @@ To create your own configuration you can start by copying the [default configura
 into your very own `$DBMIG_HOME/conf/config.yaml` file and change the fields as necessary.
 
 ## Add a new database
-To add support for a different database (e.g. `foodb`) create a sub-element beneath `database\engine` and change the 
-values as desired.
+To add support for a database engine that is not bundled into the application (e.g. `foodb`) create a sub-element 
+beneath `database\engine` and change the values as desired.
 ```yaml
 # Database preferences and settings.
 database:
@@ -175,18 +190,13 @@ into this directory
 1. modify the `template-override-directory` in the config.yaml file to contain the full path to the override directory, 
 which in this case is `$DBMIG_HOME/conf/templates`
 
-
 ## Application controls and preferences
 You can control application behaviour by altering the values of the fields beneath `general`; each field has a 
 description to help you set an appropriate value.
 
 ## Version schemes
-Add support for a custom database?
-
-TODO: set up custom version scheme?
-
-Build your own version scheme?
-Templates?
+There are two versioning schemes bundled into the product, `standard` and `semver1` (aka Semantic Versioning 1). For a 
+complete discussion of versioning schemes refer to the sections below.
 
 # I love DB Migration Builder
 If you use DB Migration Builder we'd love to hear from you and give your company/team a plug on our page! Any information
@@ -219,13 +229,59 @@ Take a look at [our list](https://github.com/dandelero/db-migration-builder/issu
 or if you'd like to see something.
 
 
-# Out-of-the-box behaviour
-TODO: supported version schemes and examples
-templates
-```yaml
-# Configuration for all supported schemes.
-version-schemes:
+# Default behaviour
+The out-of-the-box functionality bundled into the application is discussed below, along with information on how to 
+alter this behaviour. Take a look at the [sample projects](http://todo) to see how customization can be done.
 
+## Version Schemes
+There are two versioning schemes bundled into the product, `standard` and `semver1` (aka Semantic Versioning 1). 
+
+### Standard Versioning Scheme
+The [standard versioning scheme](https://github.com/dandelero/db-migration-builder/blob/master/db-migration-engine/src/main/kotlin/org/dandelero/dbmigrations/engine/version/standard/VersionWithTag.kt) 
+uses between 2 and 4 digits and an optional release tag to represent a version number.
+The [version number component](https://github.com/dandelero/db-migration-builder/blob/master/db-migration-engine/src/main/kotlin/org/dandelero/dbmigrations/engine/version/simple/FourDigitVersion.kt) 
+of the scheme accepts between 2 and 4 digits to represent `${prefix}${prefix-separator}${major}.${minor}.${build}.${revision}` and the (optional)
+[pre-release tag component](https://github.com/dandelero/db-migration-builder/blob/master/db-migration-engine/src/main/kotlin/org/dandelero/dbmigrations/engine/version/standard/PreReleaseTag.kt) 
+represents `${tagName}-${tagNumber}`.
+
+#### Four digit version number
+Between [two and four digits](https://github.com/dandelero/db-migration-builder/blob/master/db-migration-engine/src/main/kotlin/org/dandelero/dbmigrations/engine/version/simple/FourDigitVersion.kt) 
+can be used to capture the version number to represent the following components of the version number:
+* Major release number
+* Minor release number
+* Build number (_optional_)
+* Revision number (_optional_)
+
+You can specify an optional prefix and separator strings to prepend the version number. 
+
+#### Pre-release tags
+The [pre-release tag component](https://github.com/dandelero/db-migration-builder/blob/master/db-migration-engine/src/main/kotlin/org/dandelero/dbmigrations/engine/version/standard/PreReleaseTag.kt) 
+of the standard versioning scheme provides the ability to capture[release milestones (tags)](https://github.com/dandelero/db-migration-builder/blob/master/db-migration-engine/src/main/kotlin/org/dandelero/dbmigrations/engine/version/standard/tag/PreReleaseTagEnum.kt), 
+such as
+* Alpha version
+* Beta version
+* Release candidate
+
+along with an associated tag number; thus you can have `alpha-1` and `rc-2` tags.
+
+#### Configuration
+The [default configuration](https://github.com/dandelero/db-migration-builder/blob/master/db-migration-client/src/main/resources/conf/default-config.yaml) 
+provides settings to support versions such as:
+* 1.0
+* 2.1.23
+* 5.3.2.11
+* 1.1-alpha-1
+* 2.3.4-beta-2
+* 3.2.94.33-rc-8
+
+Note that:
+* no prefix/prefix separator is set
+* the `.` (dot) character is the number separator
+* the `-` is the separator between the version and pre-release tag
+* the `-` is the separator between the pre-release tag and tag number
+
+and this is captured with the following version scheme configuration:
+```yaml
   # Defines the settings for the default versioning scheme used in the application.
   default-standard:
     # The name of this versioning scheme; this must correspond to an application-supported scheme.
@@ -245,6 +301,52 @@ version-schemes:
 
     # The string that separates the tag pre-release tag from the (tag) sequence number for the standard version scheme.
     tag-sequence-separator: '-'
+```
+ 
+ To customise this versioning scheme create your own `config.yaml` file as per the prior sections. As an example if
+ we want to support versions such as `r:3-2-94-33_rc^8` the following configuration is required.
+ 
+ ```yaml
+   # Defines the settings for a custom version based off the standard version scheme.
+   my-awesome-version:
+     # The name of this versioning scheme; this must correspond to an application-supported scheme.
+     scheme: standard
+ 
+     # The prefix string that prepends the version number for the standard version scheme.
+     prefix: 'r'
+ 
+     # The string that separates the prefix and version number for the standard version scheme.
+     prefix-separator: ':'
+ 
+     # The string that separates the digits in the version number for the standard version scheme.
+     digit-separator: '-'
+ 
+     # The string that separates the version number from the tag for the standard version scheme.
+     tag-separator: '_'
+ 
+     # The string that separates the tag pre-release tag from the (tag) sequence number for the standard version scheme.
+     tag-sequence-separator: '^'
+ ```
+
+### Semantic Versioning 1
+Another scheme that is implemented in the engine is (partial) [semantic versioning 1](https://github.com/dandelero/db-migration-builder/blob/master/db-migration-engine/src/main/kotlin/org/dandelero/dbmigrations/engine/version/semver1/Semver1Version.kt) 
+ and contains the following components of the version number:
+* Major release number
+* Minor release number
+* Patch number 
+* Release timestamp
+
+#### Configuration
+The [default configuration](https://github.com/dandelero/db-migration-builder/blob/master/db-migration-client/src/main/resources/conf/default-config.yaml) 
+provides settings to support versions such as `1.0.3+20180330210358`.
+
+Note that:
+* the `.` (dot) character is the number separator
+* the `+` is the separator between the version and release timestamp
+
+and this is captured with the following version scheme configuration:
+```yaml
+version-schemes:
 
   # The default semver1 config.
   default-semver1:
@@ -259,9 +361,48 @@ version-schemes:
 
     # The string that separates the digits from the date portion of the scheme.
     date-separator: '+'
-
 ```
+ 
+ To customise this versioning scheme create your own `config.yaml` file as per the prior sections. As an example if
+ we want to support versions such as `1_0_3:20180330210358`. the following configuration is required.
+```yaml
+version-schemes:
+
+  # Custom semver1 configuration.
+  my-awesome-semver1:
+    # The name of this versioning scheme; this must correspond to an application-supported scheme.
+    scheme: semver1
+
+    # The string that separates the digits in the version number for the standard version scheme.
+    digit-separator: '_'
+
+    # The format of the date component of the version.
+    date-format: yyyyMMddHHmmss
+
+    # The string that separates the digits from the date portion of the scheme.
+    date-separator: ':'
+```
+
+You can modify the `date-format` to any pattern that is supported in the [Java date format specification](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html).
+
+## Templates
+Templates are built into the engine to support mysql and mssql at the time of this writing, support for additional 
+databases is on the agenda though.
+
+The [default templates](https://github.com/dandelero/db-migration-builder/tree/master/db-migration-engine/src/main/resources/default_templates/sql) 
+contain 3 files:
+1. upgrade_template.txt
+  - specifies the structure to embed the individual delta upgrade scripts in to compose the overall migration upgrade script
+1. rollback_template.txt
+  - specifies the structure to embed the individual delta rollback scripts in to compose the overall migration rollback script
+1. bidirectional_template.txt
+  - specifies the structure to embed the individual delta scripts in to compose *both* the upgrade and rollback migration scripts.
+
+Once you create a new set of templates for your database you need to specify the path to this folder in your very own
+`config.yaml` file; refer to the section on [adding a new database](http://todo) for further information.
+
 
 TODO: GENERAL tasks
 - Raise issue to add support for other databases {hsql, sybase, oracle, etc}
 TODO: commit SQL to database for setup, perhaps in a resources folder?
+TODO: extending the platform with custom versioning? Another database?
