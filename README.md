@@ -374,7 +374,9 @@ Once you create a new set of templates for your database you need to specify the
 `config.yaml` file; refer to the section on [adding a new database](http://todo) for further information.
 
 
-TODO: extending the platform with custom versioning? Another database?
+# Extending
+You can extend DB migration builder and add custom functionality quite easily, [this page](docs/extending.sql) contains
+details on how to customize and extend the application.
 
 
 # Contributing
