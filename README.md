@@ -375,7 +375,7 @@ Once you create a new set of templates for your database you need to specify the
 
 
 # Extending
-You can extend DB migration builder and add custom functionality quite easily, [this page](docs/extending.sql) contains
+You can extend DB migration builder and add custom functionality quite easily, [this page](docs/extending.md) contains
 details on how to customize and extend the application.
 
 
