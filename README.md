@@ -386,17 +386,3 @@ This is open-source software and you are free to use it in any way you like unde
 If you'd like to add functionality, extend behaviour or fix a bug feel free to
 [raise an issue](https://github.com/dandelero/db-migration-builder/issues/new) or 
 [pull request](https://github.com/dandelero/db-migration-builder/pull/new/master).
-
-# Financial contribution
-We believe good software engineers write useful software to help out other engineers, but we do appreciate there are 
-many good people out there that feel they'd like to make a financial contribution towards tools and products they use.
-
-In this spirit we happily divert *all* financial donations/contributions towards charities and organisations that help 
-children with life-long illnesses such as [Fragile X Syndrome](https://www.fragilex.org.au/). Yes, you read correctly, 
-**ALL financial donations**. We even provide you with a copy of the proof/receipt from the recipient organisation.
-
-Helping sick kids is one of our goals so if you really love DB Migration Builder and would like to [make a donation](http://todo) 
-our little buddies that need a hand in life would really appreciate it. 
-
-Whether it's small enough to provide a small toy or large enough to help provide therapy (physiotherapy, speech, chiropractic, 
-occupational therapy, etc) you'll help a little friend have a better chance in life.
