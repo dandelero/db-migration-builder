@@ -101,6 +101,9 @@ Steps:
 1. Run the migration script as per the following section
 1. Take the produced SQL migration script and execute it on your database
 
+If you use DB Migration Builder we'd love to hear from you and give your company/team a plug on our page! Any information
+such as company name, team size, etc would help us shape this product.
+
 ## Using DB Migrations Builder
 The most common way to use DB Migration Builder is via a plugin, and we have [maven](https://github.com/dandelero/db-migration-builder-maven-plugin)
 and [gradle](https://github.com/dandelero/db-migration-builder-gradle-plugin) plugins available. Check out the respective
@@ -200,37 +203,6 @@ description to help you set an appropriate value.
 ## Version schemes
 There are two versioning schemes bundled into the product, `standard` and `semver1` (aka Semantic Versioning 1). For a 
 complete discussion of versioning schemes refer to the sections below.
-
-# I love DB Migration Builder
-If you use DB Migration Builder we'd love to hear from you and give your company/team a plug on our page! Any information
-such as company name, team size, etc would help us shape this product.
-
-# Contributing
-This is open-source software and you are free to use it in any way you like under the Apache 2 License. 
-
-## Technical contribution
-If you'd like to add functionality, extend behaviour or fix a bug feel free to
-[raise an issue](https://github.com/dandelero/db-migration-builder/issues/new) or 
-[pull request](https://github.com/dandelero/db-migration-builder/pull/new/master).
-
-# Financial contribution
-We believe good software engineers write useful software to help out other engineers, but we do appreciate there are 
-many good people out there that feel they'd like to make a financial contribution towards tools and products they use.
-
-In this spirit we happily divert *all* financial donations/contributions towards charities and organisations that help 
-children with life-long illnesses such as [Fragile X Syndrome](https://www.fragilex.org.au/). Yes, you read correctly, 
-**ALL financial donations**. We even provide you with a copy of the proof/receipt from the recipient organisation.
-
-Helping sick kids is one of our goals so if you really love DB Migration Builder and would like to [make a donation](http://todo) 
-our little buddies that need a hand in life would really appreciate it. 
-
-Whether it's small enough to provide a small toy or large enough to help provide therapy (physiotherapy, speech, chiropractic, 
-occupational therapy, etc) you'll help a little friend have a better chance in life.
-
-# Roadmap
-Take a look at [our list](https://github.com/dandelero/db-migration-builder/issues) to see what we have on our roadmap 
-or if you'd like to see something.
-
 
 # Default behaviour
 The out-of-the-box functionality bundled into the application is discussed below, along with information on how to 
@@ -403,3 +375,26 @@ Once you create a new set of templates for your database you need to specify the
 
 
 TODO: extending the platform with custom versioning? Another database?
+
+
+# Contributing
+This is open-source software and you are free to use it in any way you like under the Apache 2 License. 
+
+## Technical contribution
+If you'd like to add functionality, extend behaviour or fix a bug feel free to
+[raise an issue](https://github.com/dandelero/db-migration-builder/issues/new) or 
+[pull request](https://github.com/dandelero/db-migration-builder/pull/new/master).
+
+# Financial contribution
+We believe good software engineers write useful software to help out other engineers, but we do appreciate there are 
+many good people out there that feel they'd like to make a financial contribution towards tools and products they use.
+
+In this spirit we happily divert *all* financial donations/contributions towards charities and organisations that help 
+children with life-long illnesses such as [Fragile X Syndrome](https://www.fragilex.org.au/). Yes, you read correctly, 
+**ALL financial donations**. We even provide you with a copy of the proof/receipt from the recipient organisation.
+
+Helping sick kids is one of our goals so if you really love DB Migration Builder and would like to [make a donation](http://todo) 
+our little buddies that need a hand in life would really appreciate it. 
+
+Whether it's small enough to provide a small toy or large enough to help provide therapy (physiotherapy, speech, chiropractic, 
+occupational therapy, etc) you'll help a little friend have a better chance in life.
