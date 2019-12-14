@@ -89,16 +89,19 @@ For the case where no modules are necessary (most systems) you will have the fol
     - 0002-insert-new-admin.sql
 ```
 
-# How do I start? Quickstart
-TODO: how to set a scheme
-How to setup a config yaml if using a different scheme
-How to lay out scripts (modules vs no modules)
-Schemes provided by default
-STarting a new project
-- use on of our schemes
-- if wanting to use a different scheme
+# Getting Started
+When setting up a new project you have to decide on the versioning scheme you want to employ.
+Take a look at our [sample projects](https://github.com/dandelero/db-migration-examples) to see working examples on 
+how to set up your project.
 
-# Using DB Migrations Builder
+Steps:
+1. Create the `change_log` table [for your database](https://github.com/dandelero/db-migration-builder/resources/setup/sql) 
+1. Select your versioning scheme, one of: `standard`, `semver1`
+1. Create your delta scripts for the version that you want to release
+1. Run the migration script as per the following section
+1. Take the produced SQL migration script and execute it on your database
+
+## Using DB Migrations Builder
 The most common way to use DB Migration Builder is via a plugin, and we have [maven](https://github.com/dandelero/db-migration-builder-maven-plugin)
 and [gradle](https://github.com/dandelero/db-migration-builder-gradle-plugin) plugins available. Check out the respective
 pages for details on how to use DB Migration Builder via those plugins.
@@ -391,18 +394,12 @@ databases is on the agenda though.
 
 The [default templates](https://github.com/dandelero/db-migration-builder/tree/master/db-migration-engine/src/main/resources/default_templates/sql) 
 contain 3 files:
-1. upgrade_template.txt
-  - specifies the structure to embed the individual delta upgrade scripts in to compose the overall migration upgrade script
-1. rollback_template.txt
-  - specifies the structure to embed the individual delta rollback scripts in to compose the overall migration rollback script
-1. bidirectional_template.txt
-  - specifies the structure to embed the individual delta scripts in to compose *both* the upgrade and rollback migration scripts.
+- upgrade_template.txt: specifies the structure to embed the individual delta upgrade scripts in to compose the overall migration upgrade script
+- rollback_template.txt: specifies the structure to embed the individual delta rollback scripts in to compose the overall migration rollback script
+- bidirectional_template.txt: specifies the structure to embed the individual delta scripts in to compose *both* the upgrade and rollback migration scripts.
 
 Once you create a new set of templates for your database you need to specify the path to this folder in your very own
 `config.yaml` file; refer to the section on [adding a new database](http://todo) for further information.
 
 
-TODO: GENERAL tasks
-- Raise issue to add support for other databases {hsql, sybase, oracle, etc}
-TODO: commit SQL to database for setup, perhaps in a resources folder?
 TODO: extending the platform with custom versioning? Another database?
