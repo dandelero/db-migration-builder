@@ -50,7 +50,7 @@ class CommandLineLauncherTest {
         val tempDir = TestUtil.createTempDirectory()
         val args = arrayOf("-idp", inputDir.absolutePath, "-odp", tempDir.absolutePath, "-d", "mssql") +
                 arrayOf("-m", "accounting, customer, packages", "-v", "1.0.0",
-                        "-cf", yamlConfigFile.absolutePath,
+                        "-cfo", yamlConfigFile.absolutePath,
                         "-vs", "default")
 
         Assertions.assertThrows(ApplicationException::class.java) {
@@ -67,7 +67,7 @@ class CommandLineLauncherTest {
         val tempDir = TestUtil.createTempDirectory()
         val args = arrayOf("-idp", inputDir.absolutePath, "-odp", tempDir.absolutePath, "-d", "mssql") +
                 arrayOf("-m", "accounting, customer",
-                        "-cf", yamlConfigFile.absolutePath,
+                        "-cfo", yamlConfigFile.absolutePath,
                         "-vs", "default")
         CommandLineLauncher.main(args)
 
@@ -96,7 +96,7 @@ class CommandLineLauncherTest {
         val tempDir = TestUtil.createTempDirectory()
         val args = arrayOf("-idp", inputDir.absolutePath, "-odp", tempDir.absolutePath, "-d", "mssql") +
                 arrayOf("-m", "accounting, customer", "-v", "1.0.0",
-                        "-cf", yamlConfigFile.absolutePath,
+                        "-cfo", yamlConfigFile.absolutePath,
                         "-vs", "default"
                 )
         CommandLineLauncher.main(args)
@@ -122,7 +122,7 @@ class CommandLineLauncherTest {
         val tempDir = TestUtil.createTempDirectory()
         val args = arrayOf("-idp", inputDir.absolutePath, "-odp", tempDir.absolutePath, "-d", "mssql") +
                 arrayOf("-m", "accounting", "-v", "1.0.0",
-                        "-cf", yamlConfigFile.absolutePath,
+                        "-cfo", yamlConfigFile.absolutePath,
                         "-vs", "default")
         CommandLineLauncher.main(args)
 
@@ -140,7 +140,7 @@ class CommandLineLauncherTest {
         val tempDir = TestUtil.createTempDirectory()
         val args = arrayOf("-idp", inputDir.absolutePath, "-odp", tempDir.absolutePath, "-d", "mssql") +
                 arrayOf("-m", "accounting",
-                        "-cf", yamlConfigFile.absolutePath,
+                        "-cfo", yamlConfigFile.absolutePath,
                         "-vs", "default")
         CommandLineLauncher.main(args)
 
@@ -158,7 +158,7 @@ class CommandLineLauncherTest {
         val tempDir = TestUtil.createTempDirectory()
         val inputDir = TestUtil.getRequiredFileOnClasspath("input/no-modules/scheme/standard")
         val args = arrayOf("-idp", inputDir.absolutePath, "-odp",
-                tempDir.absolutePath, "-d", "mssql", "-cf", lenientYamlConfigFile.absolutePath) +
+                tempDir.absolutePath, "-d", "mssql", "-cfo", lenientYamlConfigFile.absolutePath) +
                 arrayOf("-vs", "project-1", "-v", "r1.0.1")
         CommandLineLauncher.main(args)
 
@@ -176,7 +176,7 @@ class CommandLineLauncherTest {
         val tempDir = TestUtil.createTempDirectory()
         val inputDir = TestUtil.getRequiredFileOnClasspath("input/no-modules/scheme/standard")
         val args = arrayOf("-idp", inputDir.absolutePath, "-odp",
-                tempDir.absolutePath, "-d", "mssql", "-cf", yamlConfigFile.absolutePath) +
+                tempDir.absolutePath, "-d", "mssql", "-cfo", yamlConfigFile.absolutePath) +
                 arrayOf("-vs", "project-1")
         CommandLineLauncher.main(args)
 
@@ -194,7 +194,7 @@ class CommandLineLauncherTest {
         val tempDir = TestUtil.createTempDirectory()
         val inputDir = TestUtil.getRequiredFileOnClasspath("input/no-modules/scheme/semver1")
         val args = arrayOf("-idp", inputDir.absolutePath, "-odp",
-                tempDir.absolutePath, "-d", "mssql", "-cf", lenientYamlConfigFile.absolutePath) +
+                tempDir.absolutePath, "-d", "mssql", "-cfo", lenientYamlConfigFile.absolutePath) +
                 arrayOf("-vs", "project-2", "-v", "1.22.890+20130313144701")
         CommandLineLauncher.main(args)
 
